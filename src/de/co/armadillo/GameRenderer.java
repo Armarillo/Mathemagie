@@ -52,6 +52,15 @@ public class GameRenderer {
 				25, 
 				world.getChar().getRotation());
 		
+		// Draw its cannon
+		shape.rect(world.getChar().getCannon().x, 
+				world.getChar().getCannon().y, 
+				world.getChar().getCannon().width, 
+				world.getChar().getCannon().height, 
+				5, 
+				45, 
+				world.getChar().getRotation());
+		
 		shape.end();
 		
 	}

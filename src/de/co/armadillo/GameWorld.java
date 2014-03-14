@@ -14,11 +14,12 @@ public class GameWorld {
 	public GameWorld() {
 		
 		r = new Random();
-		
-		character = new GameCharacter(720/2-50, 700);
 		enemy = new Enemy[amount];
+		character = new GameCharacter(720/2-50, 700);
+		
+		// Initialize enemies
 		for(int i = 0; i < enemy.length; i++)
-			enemy[i] = new Enemy(r.nextInt(720), -r.nextInt(400), r.nextInt(200));
+			enemy[i] = new Enemy(r.nextInt(720), -r.nextInt(400), 50 + r.nextInt(100));
 								/*   width            height      velocity */
 	}
 	
