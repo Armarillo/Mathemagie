@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 public class GameRenderer {
 
 	// Instance of World to render
-	GameWorld world;
-	OrthographicCamera cam;
-	ShapeRenderer shape;
+	private GameWorld world;
+	private OrthographicCamera cam;
+	private ShapeRenderer shape;
 	
 	public GameRenderer(GameWorld world) {
 		this.world = world;
@@ -39,7 +39,13 @@ public class GameRenderer {
 		shape.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
 		
 		// Draw shape
-		shape.rect(12, 12, 50, 50);
+		shape.rect(world.getChar().getRect().x, 
+				world.getChar().getRect().y, 
+				world.getChar().getRect().width, 
+				world.getChar().getRect().height, 
+				25, 
+				25, 
+				world.getChar().getRotation());
 		
 		shape.end();
 		
