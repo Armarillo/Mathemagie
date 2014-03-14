@@ -7,8 +7,8 @@ public class Enemy {
 	private Vector2 position;
 	private Vector2 velocity;
 	
-	public Enemy(float x, float v) {
-		position = new Vector2(x, -25);
+	public Enemy(float x, float y, float v) {
+		position = new Vector2(x, y);
 		velocity = new Vector2(0, v);
 	}
 	
