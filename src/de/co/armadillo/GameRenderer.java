@@ -38,7 +38,12 @@ public class GameRenderer {
 		// Set color
 		shape.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
 		
-		// Draw shape
+		// Draw enemy
+		shape.circle(world.getEnemy().getX(), 
+				world.getEnemy().getY(), 
+				25);
+		
+		// Draw character
 		shape.rect(world.getChar().getRect().x, 
 				world.getChar().getRect().y, 
 				world.getChar().getRect().width, 

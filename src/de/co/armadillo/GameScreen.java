@@ -15,7 +15,7 @@ public class GameScreen implements Screen{
 	// The main loop of the game - it's heart, can you hear it beating?
 	@Override
 	public void render(float delta) {
-		world.update();
+		world.update(delta);
 		renderer.render();
 	}
 
