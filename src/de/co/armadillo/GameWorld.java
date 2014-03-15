@@ -4,18 +4,20 @@ import java.util.Random;
 
 public class GameWorld {
 
-	private GameCharacter character;
-	private Enemy[] enemy;
-	
 	private Random r;
+	private Aiming aim;
+	private Enemy[] enemy;
+	private GameCharacter character;
 	
-	private int amount = 5;
+	// Amount of enemies
+	private int amount = 1;
 	
 	public GameWorld() {
 		
 		r = new Random();
+		aim = new Aiming(335, 725);
 		enemy = new Enemy[amount];
-		character = new GameCharacter(720/2-50, 700);
+		character = new GameCharacter(310, 700, aim);
 		
 		// Initialize enemies
 		for(int i = 0; i < enemy.length; i++)
@@ -25,9 +27,13 @@ public class GameWorld {
 	
 	// Responsible for updating variables, controlling the game state
 	public void update(float delta) {
-		character.update();
+		
+		// Update enemies
 		for(int i = 0; i < enemy.length; i++)
 			enemy[i].update(delta);
+		
+		// Update aiming
+		aim.update(enemy[0]); // TODO: Switching enemies
 	}
 
 	public GameCharacter getChar() {
@@ -36,5 +42,9 @@ public class GameWorld {
 	
 	public Enemy[] getEnemy() {
 		return enemy;
+	}
+	
+	public Aiming getAim() {
+		return aim;
 	}
 }

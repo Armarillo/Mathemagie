@@ -23,7 +23,6 @@ public class GameRenderer {
 		// Create object which is in charge of rendering the shapes
 		shape = new ShapeRenderer();
 		shape.setProjectionMatrix(cam.combined);
-		
 	}
 
 	// Responsible for general rendering of the game world
@@ -60,6 +59,10 @@ public class GameRenderer {
 				5, 
 				45, 
 				world.getChar().getRotation());
+		
+		// Draw aiming help TODO: Draw dotted line
+		shape.line(world.getAim().getStart(), 
+				world.getAim().getEnd());
 		
 		shape.end();
 		
