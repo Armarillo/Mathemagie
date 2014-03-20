@@ -2,6 +2,11 @@ package de.co.armadillo;
 
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+
 public class GameWorld {
 
 	private Random r;
@@ -9,6 +14,7 @@ public class GameWorld {
 	private Enemy[] enemy;
 	private Background background;
 	private GameCharacter character;
+	private Stage stage;
 	
 	// Amount of enemies
 	private int amount = 1;
@@ -20,6 +26,18 @@ public class GameWorld {
 		enemy = new Enemy[amount];
 		background = new Background(0, 0, 10);
 		character = new GameCharacter(310, 700, target);
+		
+		// Create Stage
+		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
+		
+		Skin skin = new Skin(Gdx.files.internal("data/uiskin.json"));
+		
+		TextField tf = new TextField("Hello", skin);
+		tf.setPosition(50, 50);
+		tf.setSize(100, 50);
+		
+		stage.addActor(tf);
 		
 		// Initialize enemies
 		for(int i = 0; i < enemy.length; i++)
@@ -54,5 +72,9 @@ public class GameWorld {
 
 	public Background getBackground() {
 		return background;
+	}
+	
+	public Stage getStage() {
+		return stage;
 	}
 }

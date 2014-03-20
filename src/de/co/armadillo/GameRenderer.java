@@ -29,10 +29,11 @@ public class GameRenderer {
 		// Create object which is in charge of rendering sprites/fonts
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
+		
 	}
 
 	// Responsible for general rendering of the game world
-	public void render() {
+	public void render(float delta) {
 		
 		// Clear board
 		Gdx.gl.glClearColor(255/255.0f, 165/255.0f, 0/255.0f, 1f);
@@ -48,6 +49,10 @@ public class GameRenderer {
 		AssetLoader.font.draw(batch, world.getEnemy()[0].getEquation().getQuestion(), world.getEnemy()[0].getX()-22, world.getEnemy()[0].getY()-5);
 		
 		batch.end();
+		
+		// Draw stage
+		world.getStage().act(delta);
+		world.getStage().draw();
 		
 		shape.begin(ShapeType.Line);
 		
@@ -76,6 +81,8 @@ public class GameRenderer {
 				5, 
 				45, 
 				world.getChar().getRotation());
+		
+		// Draw text field
 		
 		shape.end();
 	}
