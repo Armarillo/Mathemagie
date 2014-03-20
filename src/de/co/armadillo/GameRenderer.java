@@ -3,6 +3,7 @@ package de.co.armadillo;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
@@ -12,6 +13,7 @@ public class GameRenderer {
 	private GameWorld world;
 	private OrthographicCamera cam;
 	private ShapeRenderer shape;
+	private SpriteBatch batch;
 	
 	public GameRenderer(GameWorld world) {
 		this.world = world;
@@ -23,6 +25,10 @@ public class GameRenderer {
 		// Create object which is in charge of rendering the shapes
 		shape = new ShapeRenderer();
 		shape.setProjectionMatrix(cam.combined);
+		
+		// Create object which is in charge of rendering sprites/fonts
+		batch = new SpriteBatch();
+		batch.setProjectionMatrix(cam.combined);
 	}
 
 	// Responsible for general rendering of the game world
@@ -39,7 +45,7 @@ public class GameRenderer {
 		
 		// Draw enemies
 		for(int i = 0; i < world.getEnemy().length; i++) {
-			shape.circle(world.getEnemy()[i].getX(), world.getEnemy()[i].getY(), 25);
+			shape.circle(world.getEnemy()[i].getX(), world.getEnemy()[i].getY(), 40);
 		}
 		
 		// Draw character
@@ -60,11 +66,14 @@ public class GameRenderer {
 				45, 
 				world.getChar().getRotation());
 		
-		// Draw aiming help TODO: Draw dotted line
-		shape.line(world.getAim().getStart(), 
-				world.getAim().getEnd());
-		
 		shape.end();
+		
+		batch.begin();
+		
+		// Draw equation
+		AssetLoader.font.draw(batch, world.getEnemy()[0].getEquation().getQuestion(), world.getEnemy()[0].getX()-22, world.getEnemy()[0].getY()-5);
+		
+		batch.end();
 		
 	}
 

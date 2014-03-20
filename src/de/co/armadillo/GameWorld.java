@@ -5,7 +5,7 @@ import java.util.Random;
 public class GameWorld {
 
 	private Random r;
-	private Aiming aim;
+	private Target target;
 	private Enemy[] enemy;
 	private GameCharacter character;
 	
@@ -15,14 +15,13 @@ public class GameWorld {
 	public GameWorld() {
 		
 		r = new Random();
-		aim = new Aiming(335, 725);
+		target = new Target();
 		enemy = new Enemy[amount];
-		character = new GameCharacter(310, 700, aim);
+		character = new GameCharacter(310, 700, target);
 		
 		// Initialize enemies
 		for(int i = 0; i < enemy.length; i++)
 			enemy[i] = new Enemy(r.nextInt(720), -r.nextInt(400), 50 + r.nextInt(100));
-								/*   width            height      velocity */
 	}
 	
 	// Responsible for updating variables, controlling the game state
@@ -33,7 +32,7 @@ public class GameWorld {
 			enemy[i].update(delta);
 		
 		// Update aiming
-		aim.update(enemy[0]); // TODO: Switching enemies
+		target.update(enemy[0]); // TODO: Switching enemies
 	}
 
 	public GameCharacter getChar() {
@@ -44,7 +43,7 @@ public class GameWorld {
 		return enemy;
 	}
 	
-	public Aiming getAim() {
-		return aim;
+	public Target getAim() {
+		return target;
 	}
 }

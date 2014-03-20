@@ -7,18 +7,18 @@ public class GameCharacter {
 	private Rectangle rect;
 	private Rectangle cannon;
 	
-	private Aiming aim;
+	private Target target;
 	
-	public GameCharacter(float x, float y, Aiming aim) {
+	public GameCharacter(float x, float y, Target target) {
 		
-		this.aim = aim;
+		this.target = target;
 		
 		rect = new Rectangle(x, y, 50, 50);
 		cannon = new Rectangle(x+20, y-20, 10, 20);
 	}
 	
 	public float getRotation() {
-		return aim.getAngle();
+		return target.getAngle();
 	}
 	
 	public Rectangle getRect() {
