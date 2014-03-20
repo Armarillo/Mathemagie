@@ -38,6 +38,17 @@ public class GameRenderer {
 		Gdx.gl.glClearColor(255/255.0f, 165/255.0f, 0/255.0f, 1f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
+		batch.begin();
+		
+		// Draw background
+		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY());
+		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY()-840);
+		
+		// Draw equation
+		AssetLoader.font.draw(batch, world.getEnemy()[0].getEquation().getQuestion(), world.getEnemy()[0].getX()-22, world.getEnemy()[0].getY()-5);
+		
+		batch.end();
+		
 		shape.begin(ShapeType.Line);
 		
 		// Set color
@@ -67,14 +78,6 @@ public class GameRenderer {
 				world.getChar().getRotation());
 		
 		shape.end();
-		
-		batch.begin();
-		
-		// Draw equation
-		AssetLoader.font.draw(batch, world.getEnemy()[0].getEquation().getQuestion(), world.getEnemy()[0].getX()-22, world.getEnemy()[0].getY()-5);
-		
-		batch.end();
-		
 	}
 
 }

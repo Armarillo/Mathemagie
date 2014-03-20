@@ -7,6 +7,7 @@ public class GameWorld {
 	private Random r;
 	private Target target;
 	private Enemy[] enemy;
+	private Background background;
 	private GameCharacter character;
 	
 	// Amount of enemies
@@ -17,6 +18,7 @@ public class GameWorld {
 		r = new Random();
 		target = new Target();
 		enemy = new Enemy[amount];
+		background = new Background(0, 0, 10);
 		character = new GameCharacter(310, 700, target);
 		
 		// Initialize enemies
@@ -26,6 +28,9 @@ public class GameWorld {
 	
 	// Responsible for updating variables, controlling the game state
 	public void update(float delta) {
+		
+		// Update background
+		background.update(delta);
 		
 		// Update enemies
 		for(int i = 0; i < enemy.length; i++)
@@ -45,5 +50,9 @@ public class GameWorld {
 	
 	public Target getAim() {
 		return target;
+	}
+
+	public Background getBackground() {
+		return background;
 	}
 }
