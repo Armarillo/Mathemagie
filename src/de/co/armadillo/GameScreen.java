@@ -8,8 +8,14 @@ public class GameScreen implements Screen{
 	private GameRenderer renderer;
 	
 	public GameScreen() {
+		
+		// Initialize fundament
 		world = new GameWorld();
 		renderer = new GameRenderer(world);
+		
+		// Play music
+		AssetLoader.music.play();
+		AssetLoader.music.setLooping(true);
 	}
 	
 	// The main loop of the game - it's heart, can you hear it beating?
