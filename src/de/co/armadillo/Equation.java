@@ -21,8 +21,8 @@ public class Equation {
 		if(difficulty == 0) {
 			
 			// Get number between 0 - 100
-			int a = r.nextInt(100);
-			int b = r.nextInt(100);
+			int a = r.nextInt(10);
+			int b = r.nextInt(10);
 			
 			answer = a+b;
 			return a + " + " + b;

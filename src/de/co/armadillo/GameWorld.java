@@ -17,6 +17,7 @@ public class GameWorld {
 	private GameCharacter character;
 	private Stage stage;
 	private TextField tf;
+	private Projectile fire;
 	
 	// Amount of enemies
 	//private int amount = 1;
@@ -27,6 +28,7 @@ public class GameWorld {
 		target = new Target();
 		background = new Background(0, 0, 10);
 		character = new GameCharacter(310, 700, target);
+		fire = new Projectile(target);
 		enemy = new Enemy(r.nextInt(720), -r.nextInt(400), 50 + r.nextInt(50));
 		
 		// Create Stage
@@ -41,17 +43,19 @@ public class GameWorld {
 		tf.setPosition(265, 25);
 		tf.setSize(150, 50);
 		tf.setMaxLength(9);
-		tf.setCursorPosition(5);
+		stage.setKeyboardFocus(tf);
 		tf.setTextFieldListener(new TextFieldListener() {
 			
 			public void keyTyped (TextField textField, char key) {
 
 				// Check if input matches answer of equation
 				try {
-					if(enemy.getEquation().checkAnswer(Integer.valueOf(tf.getText())))
+					if(enemy.getEquation().checkAnswer(Integer.valueOf(tf.getText()))) {
 						tf.setText("");
-					else if(key == '\n' || key == '\r')
+						fire.shoot(enemy);
+					}else if(key == '\n' || key == '\r') {
 						tf.setText("");
+					}
 				}catch(Exception ex) {}
 			}
 		});
@@ -66,6 +70,9 @@ public class GameWorld {
 		
 		// Update enemy	
 		enemy.update(delta);
+		
+		// Update projectile
+		fire.update(delta);
 		
 		// Update aiming
 		target.update(enemy); // TODO: Switching enemies
@@ -89,5 +96,9 @@ public class GameWorld {
 	
 	public Stage getStage() {
 		return stage;
+	}
+	
+	public Projectile getProjectile() {
+		return fire;
 	}
 }

@@ -62,6 +62,9 @@ public class GameRenderer {
 		// Draw enemy
 		shape.circle(world.getEnemy().getX(), world.getEnemy().getY(), 40);
 		
+		// Draw projectile
+		shape.circle(world.getProjectile().getX(), world.getProjectile().getY(), 3);
+		
 		// Draw character
 		shape.rect(world.getChar().getRect().x, 
 				world.getChar().getRect().y, 
