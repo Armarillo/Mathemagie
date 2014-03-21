@@ -46,7 +46,7 @@ public class GameRenderer {
 		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY()-840);
 		
 		// Draw equation
-		AssetLoader.font.draw(batch, world.getEnemy()[0].getEquation().getQuestion(), world.getEnemy()[0].getX()-22, world.getEnemy()[0].getY()-5);
+		AssetLoader.font.draw(batch, world.getEnemy().getEquation().getQuestion(), world.getEnemy().getX()-22, world.getEnemy().getY()-5);
 		
 		batch.end();
 		
@@ -59,10 +59,8 @@ public class GameRenderer {
 		// Set color
 		shape.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
 		
-		// Draw enemies
-		for(int i = 0; i < world.getEnemy().length; i++) {
-			shape.circle(world.getEnemy()[i].getX(), world.getEnemy()[i].getY(), 40);
-		}
+		// Draw enemy
+		shape.circle(world.getEnemy().getX(), world.getEnemy().getY(), 40);
 		
 		// Draw character
 		shape.rect(world.getChar().getRect().x, 

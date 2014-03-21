@@ -5,7 +5,7 @@ import java.util.Random;
 public class Equation {
 
 	private String question;
-	private int answer;
+	private double answer;
 	private Random r;
 	
 	/**
@@ -24,6 +24,7 @@ public class Equation {
 			int a = r.nextInt(100);
 			int b = r.nextInt(100);
 			
+			answer = a+b;
 			return a + " + " + b;
 			
 		}else if(difficulty == 1) {
@@ -36,6 +37,7 @@ public class Equation {
 			a = Math.round(a*100)/100.0;
 			b = Math.round(b*100)/100.0;
 			
+			answer = a+b;
 			return a + " + " + b;
 			
 		}else if(difficulty == 2) {
@@ -48,6 +50,7 @@ public class Equation {
 			a = Math.round(a*1000)/1000.0;
 			b = Math.round(b*1000)/1000.0;
 			
+			answer = a+b;
 			return a + " + " + b;
 	
 		}else{
@@ -60,11 +63,14 @@ public class Equation {
 		return question;
 	}
 	
-	public int getAnswer() {
+	public double getAnswer() {
 		return answer;
 	}
 	
 	public boolean checkAnswer(int answer) {
-		return true;
+		if(answer == this.answer)
+			return true;
+		else
+			return false;
 	}
 }
