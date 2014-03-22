@@ -101,4 +101,8 @@ public class GameWorld {
 	public Projectile getProjectile() {
 		return fire;
 	}
+	
+	public Target getTarget() {
+		return target;
+	}
 }

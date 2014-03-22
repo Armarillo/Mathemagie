@@ -6,10 +6,12 @@ public class Target {
 
 	private Vector2 start;
 	private Vector2 end;
+	private float angle;
 	
 	public Target() {
 		start = new Vector2(335, 725); // Position of our cannon
 		end = new Vector2(335, 725);
+		angle = 0;
 	}
 
 	public void update(Enemy enemy) {
@@ -17,6 +19,9 @@ public class Target {
 		// Update end point to enemy movement
 		end.x = enemy.getX();
 		end.y = enemy.getY();
+		
+		// spin
+		angle+=2;
 	}
 	public float getAngle() {
 		return end.cpy().sub(start).angle()+90;
@@ -27,5 +32,9 @@ public class Target {
 	
 	public Vector2 getEnd() {
 		return end;
+	}
+	
+	public float getSpin() {
+		return angle;
 	}
 }
