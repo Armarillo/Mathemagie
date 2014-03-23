@@ -22,7 +22,7 @@ public class GameWindow extends Game{
 		batch = new SpriteBatch();
 		batch.setProjectionMatrix(cam.combined);
 		
-		// Set shaprenderer, necessary for drawing shapes
+		// Set shape renderer
 		shape = new ShapeRenderer();
 		shape.setProjectionMatrix(cam.combined);
 		

@@ -20,12 +20,9 @@ public class Projectile {
 	
 	public void update(float delta) {
 		position.add(velocity.cpy().scl(delta));
-		System.out.println(target.getAngle());
 	}
 	
 	public void shoot(Enemy enemy) {
-		
-		System.out.println("SHOT IS DONE");
 		velocity.x = 355;
 		velocity.y = 725;
 		velocity.setAngle(target.getAngle()-90);

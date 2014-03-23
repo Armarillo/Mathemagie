@@ -45,7 +45,7 @@ public class GameCredits implements Screen {
 		
 		// Change screen
 		if(runTime >= 5)
-			window.setScreen(new GameScreen());
+			window.setScreen(new GameMenu(window));
 		
 		// Clear screen
 		Gdx.gl.glClearColor(0/255.0f, 0/255.0f, 0/255.0f, 1);
