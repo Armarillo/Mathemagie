@@ -14,9 +14,8 @@ public class GameScreen implements Screen{
 		renderer = new GameRenderer(world);
 		
 		// Play music
-		AssetLoader.menuMusic.stop();
-		AssetLoader.gameMusic.play();
-		AssetLoader.gameMusic.setLooping(true);
+		AssetLoader.menuMusic.play();
+		AssetLoader.menuMusic.setLooping(true);
 	}
 	
 	// The main loop of the game - it's heart, can you hear it beating?

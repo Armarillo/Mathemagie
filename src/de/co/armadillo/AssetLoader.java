@@ -54,7 +54,7 @@ public class AssetLoader {
 		
 		// Music
 		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("data/menuMusic.wav"));
-		gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gameMusic.wav"));
+		//gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gameMusic.wav"));
 		
 		// Skin
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));

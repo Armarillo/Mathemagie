@@ -59,6 +59,12 @@ public class GameMenu implements Screen{
 		TextButton quit = new TextButton("Quit", AssetLoader.skin);
 		quit.setSize(275, 50);
 		quit.setPosition(223, 325);
+		quit.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				System.exit(0);
+			}
+		});
 		stage.addActor(quit);
 	}
 	
