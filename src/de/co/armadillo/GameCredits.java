@@ -3,17 +3,12 @@ package de.co.armadillo;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameCredits implements Screen {
 
-	private SpriteBatch batch;
-	private OrthographicCamera cam;
 	private GameWindow window;
 	
 	private float fade;
-	
 	private float runTime;
 	private float lastTime;
 	
@@ -21,14 +16,6 @@ public class GameCredits implements Screen {
 
 		// Instance of window
 		this.window = window;
-		
-		// Create camera
-		cam = new OrthographicCamera();
-		cam.setToOrtho(true);
-		
-		// Use our "pencil" on camera
-		batch = new SpriteBatch();
-		batch.setProjectionMatrix(cam.combined);
 		
 		// Variable for fade in/ and out
 		fade = 0;
@@ -64,14 +51,14 @@ public class GameCredits implements Screen {
 		Gdx.gl.glClearColor(0/255.0f, 0/255.0f, 0/255.0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		batch.begin();
+		window.batch.begin();
 		
-		batch.setColor(1f, 1f, 1f, fade);
+		window.batch.setColor(1f, 1f, 1f, fade);
 		
 		// Draw picture
-		batch.draw(AssetLoader.credits, 57, 840/2-57);
+		window.batch.draw(AssetLoader.credits, 57, 840/2-57);
 		
-		batch.end();
+		window.batch.end();
 		
 	}
 

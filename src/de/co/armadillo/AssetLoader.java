@@ -48,5 +48,10 @@ public class AssetLoader {
 	
 	public static void dispose() {
 		font.dispose();
+		fontTitle.dispose();
+		bg.dispose();
+		music.dispose();
+		
+		
 	}
 }

@@ -3,17 +3,14 @@ package de.co.armadillo;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameRenderer {
 
 	// Instance of World to render
 	private GameWorld world;
+	private GameWindow window;
 	private OrthographicCamera cam;
-	private ShapeRenderer shape;
-	private SpriteBatch batch;
 	
 	public GameRenderer(GameWorld world) {
 		this.world = world;
@@ -21,15 +18,6 @@ public class GameRenderer {
 		// Create cam
 		cam = new OrthographicCamera();
 		cam.setToOrtho(true);
-	
-		// Create object which is in charge of rendering the shapes
-		shape = new ShapeRenderer();
-		shape.setProjectionMatrix(cam.combined);
-		
-		// Create object which is in charge of rendering sprites/fonts
-		batch = new SpriteBatch();
-		batch.setProjectionMatrix(cam.combined);
-		
 	}
 
 	// Responsible for general rendering of the game world
@@ -39,50 +27,52 @@ public class GameRenderer {
 		Gdx.gl.glClearColor(255/255.0f, 165/255.0f, 0/255.0f, 1f);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		batch.begin();
+		window.batch.begin();
 		
 		// Draw background
-		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY());
-		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY()-840);
-		
-		// Draw equation
-		AssetLoader.font.draw(batch, world.getEnemy().getEquation().getQuestion(), world.getEnemy().getX()-22, world.getEnemy().getY()-5);
+		window.batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY());
+		window.batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY()-840);
 		
 		// Draw cross
-		batch.draw(AssetLoader.cross, 
+		window.batch.draw(AssetLoader.cross, 
 				world.getEnemy().getX()-35, 
 				world.getEnemy().getY()-35, 
 				35, 
 				35, 
 				70, 
-				70, 
+				70,  	
 				2, 
 				2, 
 				world.getTarget().getSpin());
 		
-		batch.end();
+		// Draw equation
+		AssetLoader.font.draw(window.batch, 
+				world.getEnemy().getEquation().getQuestion(), 
+				world.getEnemy().getX()-22, world.getEnemy().getY()-5);
+		
+		window.batch.end();
 		
 		// Draw stage
 		world.getStage().act(delta);
 		world.getStage().draw();
 		
-		shape.begin(ShapeType.Line);
+		window.shape.begin(ShapeType.Line);
 		
 		// Set color
-		shape.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
+		window.shape.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
 		
 		// Draw enemy
-		shape.circle(world.getEnemy().getX(), 
+		window.shape.circle(world.getEnemy().getX(), 
 				world.getEnemy().getY(), 
 				40);
 		
 		// Draw projectile
-		shape.circle(world.getProjectile().getX(), 
+		window.shape.circle(world.getProjectile().getX(), 
 				world.getProjectile().getY(), 
 				3);
 		
 		// Draw character
-		shape.rect(world.getChar().getRect().x, 
+		window.shape.rect(world.getChar().getRect().x, 
 				world.getChar().getRect().y, 
 				world.getChar().getRect().width, 
 				world.getChar().getRect().height, 
@@ -91,7 +81,7 @@ public class GameRenderer {
 				world.getChar().getRotation());
 		
 		// Draw its cannon
-		shape.rect(world.getChar().getCannon().x, 
+		window.shape.rect(world.getChar().getCannon().x, 
 				world.getChar().getCannon().y, 
 				world.getChar().getCannon().width, 
 				world.getChar().getCannon().height, 
@@ -99,15 +89,14 @@ public class GameRenderer {
 				45, 
 				world.getChar().getRotation());
 		
-		// Draw targeting cross
-		shape.setColor(255/255.0f, 0/255.0f, 0/255.0f, 1);
-		
 		// Mark enemy red
-		shape.circle(world.getTarget().getEnd().x, 
+		window.shape.setColor(255/255.0f, 0/255.0f, 0/255.0f, 1);
+		
+		window.shape.circle(world.getTarget().getEnd().x, 
 				world.getTarget().getEnd().y, 
 				40);
 		
-		shape.end();
+		window.shape.end();
 	}
 
 }
