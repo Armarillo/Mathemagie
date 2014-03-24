@@ -17,12 +17,13 @@ public class Target {
 	public void update(Enemy enemy) {
 		
 		// Update end point to enemy movement
-		end.x = enemy.getX();
-		end.y = enemy.getY();
+		end.x = enemy.getCircle().x;
+		end.y = enemy.getCircle().y;
 		
 		// spin
 		angle+=2;
 	}
+	
 	public float getAngle() {
 		return end.cpy().sub(start).angle()+90;
 	}

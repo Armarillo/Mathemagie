@@ -13,6 +13,7 @@ public class AssetLoader {
 	public static Texture bg;
 	
 	public static TextureRegion credits;
+	public static TextureRegion armadillo;
 	
 	public static BitmapFont font;
 	public static BitmapFont fontTitle;
@@ -49,6 +50,10 @@ public class AssetLoader {
 		bg = new Texture("data/background.png");
 	
 		// Armadillo picture
+		armadillo = new TextureRegion(new Texture(Gdx.files.internal("data/armadillo.png")));
+		armadillo.flip(false, true);
+		
+		// Name
 		credits = new TextureRegion(new Texture(Gdx.files.internal("data/credits.png")));
 		credits.flip(false, true);
 		
@@ -82,7 +87,6 @@ public class AssetLoader {
 		font.dispose();
 		fontTitle.dispose();
 		bg.dispose();
-		gameMusic.dispose();
 		menuMusic.dispose();
 		
 		

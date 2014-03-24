@@ -14,12 +14,19 @@ public class Projectile {
 	public Projectile(Target target) {
 		position = new Vector2(335, 725);
 		velocity = new Vector2(0, 0);
-		circle = new Circle(0, 0, 3);
+		circle = new Circle(position.x, position.y, 3);
 		this.target = target; 
 	}
 	
 	public void update(float delta) {
 		position.add(velocity.cpy().scl(delta));
+		circle.setPosition(position.x, position.y);
+	}
+	
+	public void checkCollision(Circle enemy) {
+		if(circle.overlaps(enemy)) {
+			System.out.println("BOOM");
+		}
 	}
 	
 	public void shoot(Enemy enemy) {
@@ -28,16 +35,7 @@ public class Projectile {
 		velocity.setAngle(target.getAngle()-90);
 	}
 	
-	public float getX() {
-		return position.x;
-	}
-	
-	public float getY() {
-		return position.y;
-	}
-	
 	public Circle getCircle() {
 		return circle;
 	}
-	
 }

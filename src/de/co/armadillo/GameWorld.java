@@ -76,6 +76,9 @@ public class GameWorld {
 		
 		// Update aiming
 		target.update(enemy); // TODO: Switching enemies
+		
+		// Check if projectile hit enemy
+		fire.checkCollision(enemy.getCircle());
 	}
 
 	public GameCharacter getChar() {

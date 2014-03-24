@@ -27,7 +27,7 @@ public class GameWindow extends Game{
 		shape.setProjectionMatrix(cam.combined);
 		
 		AssetLoader.load();
-		setScreen(new GameCredits(this));
+		setScreen(new PictureScreen(this));
 	}
 	
 	@Override

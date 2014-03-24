@@ -46,8 +46,8 @@ public class GameRenderer {
 		
 		// Draw cross
 		batch.draw(AssetLoader.cross, 
-				world.getEnemy().getX()-35, 
-				world.getEnemy().getY()-35, 
+				world.getEnemy().getCircle().x-35, 
+				world.getEnemy().getCircle().y-35, 
 				35, 
 				35, 
 				70, 
@@ -59,7 +59,7 @@ public class GameRenderer {
 		// Draw equation
 		AssetLoader.font.draw(batch, 
 				world.getEnemy().getEquation().getQuestion(), 
-				world.getEnemy().getX()-22, world.getEnemy().getY()-5);
+				world.getEnemy().getCircle().x-22, world.getEnemy().getCircle().y-5);
 		
 		batch.end();
 		
@@ -73,14 +73,14 @@ public class GameRenderer {
 		shape.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
 		
 		// Draw enemy
-		shape.circle(world.getEnemy().getX(), 
-				world.getEnemy().getY(), 
-				40);
+		shape.circle(world.getEnemy().getCircle().x, 
+				world.getEnemy().getCircle().y, 
+				world.getEnemy().getCircle().radius);
 		
 		// Draw projectile
-		shape.circle(world.getProjectile().getX(), 
-				world.getProjectile().getY(), 
-				3);
+		shape.circle(world.getProjectile().getCircle().x, 
+				world.getProjectile().getCircle().y, 
+				world.getProjectile().getCircle().radius);
 		
 		// Draw character
 		shape.rect(world.getChar().getRect().x, 
