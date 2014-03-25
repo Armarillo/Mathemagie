@@ -30,6 +30,11 @@ public class Projectile {
 			return false;
 	}
 	
+	public void reset() {
+		position.set(335, 725);
+		velocity.set(0, 0);
+	}
+	
 	public void shoot(Enemy enemy) {
 		velocity.x = 355;
 		velocity.y = 725;

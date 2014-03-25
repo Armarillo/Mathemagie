@@ -46,8 +46,8 @@ public class GameRenderer {
 		
 		// Draw cross
 		batch.draw(AssetLoader.cross, 
-				world.getEnemy()[world.getTargetNumb()].getCircle().x-35, 
-				world.getEnemy()[world.getTargetNumb()].getCircle().y-35, 
+				world.getTarget().getEnd().x-35, 
+				world.getTarget().getEnd().y-35, 
 				35, 
 				35, 
 				70, 

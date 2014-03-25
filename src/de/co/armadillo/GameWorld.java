@@ -10,7 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 
 public class GameWorld {
 
+	// Helper Objects
 	private Random r;
+	
+	// Entitites
 	private Target target;
 	private Enemy[] enemy;
 	private Background background;
@@ -20,10 +23,13 @@ public class GameWorld {
 	private Projectile fire;
 	
 	// Amount of enemies
-	private int amount = 2;
+	private int amount = 4;
 	
 	// Target index
-	private int targetNumb;
+	private int targetIndex = 0;
+	
+	// Target arrangement
+	private int[] targetArrange;
 	
 	public GameWorld() {
 		
@@ -40,9 +46,24 @@ public class GameWorld {
 			enemy[i] = new Enemy(r.nextInt(720), -r.nextInt(400), 50 + r.nextInt(50));
 		}
 		
-		// Choose target for enemy
+		// Get target aiming
 		target = new Target();
-		targetNumb = r.nextInt(amount);
+		
+		// Arrange Gegnerfolge (SEE: Test.java)
+		targetArrange = new int[amount];
+		
+		String arrangement = "";
+		
+		// Make an arrangement from 0 - amount, no number comes twice, every number comes once
+		while(arrangement.length() < amount) {
+			String newValue = String.valueOf(r.nextInt(amount));
+			if(!arrangement.contains(newValue))
+				arrangement += newValue;
+		}
+		
+		// Convert string to array of integers
+		for(int i = 0; i < arrangement.length(); i++)
+			targetArrange[i] = Character.getNumericValue(arrangement.charAt(i));
 		
 		// Create Cannon, targeting the target
 		character = new GameCharacter(310, 700, target);
@@ -69,9 +90,9 @@ public class GameWorld {
 
 				// Check if input matches answer of equation
 				try {
-					if(enemy[targetNumb].getEquation().checkAnswer(Integer.valueOf(tf.getText()))) {
+					if(enemy[targetArrange[targetIndex]].getEquation().checkAnswer(Integer.valueOf(tf.getText()))) {
 						tf.setText("");
-						fire.shoot(enemy[targetNumb]);
+						fire.shoot(enemy[targetArrange[targetIndex]]);
 					}else if(key == '\n' || key == '\r') {
 						tf.setText("");
 					}
@@ -96,12 +117,20 @@ public class GameWorld {
 		fire.update(delta);
 		
 		// Update aiming
-		target.update(enemy[targetNumb]); // TODO: Switching enemies
+		target.update(enemy[targetArrange[targetIndex]]);
 		
 		// Check if projectile hit enemy
-		if(fire.checkCollision(enemy[targetNumb].getCircle())) {
-			enemy[targetNumb].gotHit();
-			enemy[targetNumb].destroy();
+		if(fire.checkCollision(enemy[targetArrange[targetIndex]].getCircle())) {
+			
+			// Set enemy status
+			enemy[targetArrange[targetIndex]].gotHit();
+			enemy[targetArrange[targetIndex]].destroy();
+			
+			// Reset projectile
+			fire.reset();
+			
+			// Focus next enemy
+			targetIndex++;
 		}
 	}
 
@@ -133,7 +162,7 @@ public class GameWorld {
 		return target;
 	}
 	
-	public int getTargetNumb() {
-		return targetNumb;
+	public int getTargetIndex() {
+		return targetIndex;
 	}
 }
