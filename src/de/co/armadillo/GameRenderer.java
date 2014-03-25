@@ -46,8 +46,8 @@ public class GameRenderer {
 		
 		// Draw cross
 		batch.draw(AssetLoader.cross, 
-				world.getEnemy().getCircle().x-35, 
-				world.getEnemy().getCircle().y-35, 
+				world.getEnemy()[world.getTargetNumb()].getCircle().x-35, 
+				world.getEnemy()[world.getTargetNumb()].getCircle().y-35, 
 				35, 
 				35, 
 				70, 
@@ -57,10 +57,12 @@ public class GameRenderer {
 				world.getTarget().getSpin());
 		
 		// Draw equation
-		AssetLoader.font.draw(batch, 
-				world.getEnemy().getEquation().getQuestion(), 
-				world.getEnemy().getCircle().x-22, world.getEnemy().getCircle().y-5);
-		
+		for(int i = 0; i < world.getEnemy().length; i++) {
+			
+			AssetLoader.font.draw(batch, 
+					world.getEnemy()[i].getEquation().getQuestion(), 
+					world.getEnemy()[i].getCircle().x-22, world.getEnemy()[i].getCircle().y-5);
+		}
 		batch.end();
 		
 		// Draw stage
@@ -72,11 +74,12 @@ public class GameRenderer {
 		// Set color
 		shape.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
 		
-		// Draw enemy
-		shape.circle(world.getEnemy().getCircle().x, 
-				world.getEnemy().getCircle().y, 
-				world.getEnemy().getCircle().radius);
-		
+		// Draw enemies
+		for(int i = 0; i < world.getEnemy().length; i++) {
+			shape.circle(world.getEnemy()[i].getCircle().x, 
+					world.getEnemy()[i].getCircle().y, 
+					world.getEnemy()[i].getCircle().radius);
+		}
 		// Draw projectile
 		shape.circle(world.getProjectile().getCircle().x, 
 				world.getProjectile().getCircle().y, 

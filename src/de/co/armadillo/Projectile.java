@@ -23,10 +23,11 @@ public class Projectile {
 		circle.setPosition(position.x, position.y);
 	}
 	
-	public void checkCollision(Circle enemy) {
-		if(circle.overlaps(enemy)) {
-			System.out.println("BOOM");
-		}
+	public boolean checkCollision(Circle enemy) {
+		if(circle.overlaps(enemy))
+			return true;
+		else
+			return false;
 	}
 	
 	public void shoot(Enemy enemy) {

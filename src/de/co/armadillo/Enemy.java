@@ -10,6 +10,8 @@ public class Enemy {
 	private Circle circle;
 	private Equation equation;
 	
+	private boolean isHit = false;
+	
 	public Enemy(float x, float y, float v) {
 		position = new Vector2(x, y);
 		velocity = new Vector2(0, v);
@@ -28,7 +30,20 @@ public class Enemy {
 		
 	}
 	
+	public void destroy() {
+		velocity.y = 0;
+		position.x = 900;
+	}
+	
+	public void gotHit() {
+		isHit = true;
+	}
+	
 	// Getters
+	public boolean isHit() {
+		return isHit;
+	}
+	
 	public Circle getCircle() {
 		return circle;
 	}

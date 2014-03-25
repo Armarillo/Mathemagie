@@ -12,7 +12,7 @@ public class GameWorld {
 
 	private Random r;
 	private Target target;
-	private Enemy enemy;
+	private Enemy[] enemy;
 	private Background background;
 	private GameCharacter character;
 	private Stage stage;
@@ -20,16 +20,35 @@ public class GameWorld {
 	private Projectile fire;
 	
 	// Amount of enemies
-	//private int amount = 1;
+	private int amount = 2;
+	
+	// Target index
+	private int targetNumb;
 	
 	public GameWorld() {
 		
 		r = new Random();
-		target = new Target();
+		
+		// Background object necessary for scrolling
 		background = new Background(0, 0, 10);
+		
+		// Initialize array
+		enemy = new Enemy[amount];
+		
+		// Initialize enemies
+		for(int i = 0; i < enemy.length; i++) {
+			enemy[i] = new Enemy(r.nextInt(720), -r.nextInt(400), 50 + r.nextInt(50));
+		}
+		
+		// Choose target for enemy
+		target = new Target();
+		targetNumb = r.nextInt(amount);
+		
+		// Create Cannon, targeting the target
 		character = new GameCharacter(310, 700, target);
+		
+		// Projectile which is destined to hit specific target
 		fire = new Projectile(target);
-		enemy = new Enemy(r.nextInt(720), -r.nextInt(400), 50 + r.nextInt(50));
 		
 		// Create Stage
 		stage = new Stage();
@@ -50,9 +69,9 @@ public class GameWorld {
 
 				// Check if input matches answer of equation
 				try {
-					if(enemy.getEquation().checkAnswer(Integer.valueOf(tf.getText()))) {
+					if(enemy[targetNumb].getEquation().checkAnswer(Integer.valueOf(tf.getText()))) {
 						tf.setText("");
-						fire.shoot(enemy);
+						fire.shoot(enemy[targetNumb]);
 					}else if(key == '\n' || key == '\r') {
 						tf.setText("");
 					}
@@ -68,24 +87,29 @@ public class GameWorld {
 		// Update background
 		background.update(delta);
 		
-		// Update enemy	
-		enemy.update(delta);
+		// Update every enemy	
+		for(int i = 0; i < enemy.length; i++) {
+			enemy[i].update(delta);
+		}
 		
 		// Update projectile
 		fire.update(delta);
 		
 		// Update aiming
-		target.update(enemy); // TODO: Switching enemies
+		target.update(enemy[targetNumb]); // TODO: Switching enemies
 		
 		// Check if projectile hit enemy
-		fire.checkCollision(enemy.getCircle());
+		if(fire.checkCollision(enemy[targetNumb].getCircle())) {
+			enemy[targetNumb].gotHit();
+			enemy[targetNumb].destroy();
+		}
 	}
 
 	public GameCharacter getChar() {
 		return character;
 	}
 	
-	public Enemy getEnemy() {
+	public Enemy[] getEnemy() {
 		return enemy;
 	}
 	
@@ -107,5 +131,9 @@ public class GameWorld {
 	
 	public Target getTarget() {
 		return target;
+	}
+	
+	public int getTargetNumb() {
+		return targetNumb;
 	}
 }
