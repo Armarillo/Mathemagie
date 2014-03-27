@@ -33,6 +33,7 @@ public class Enemy {
 	public void destroy() {
 		velocity.y = 0;
 		position.x = 900;
+		position.y = 0;
 	}
 	
 	public void gotHit() {

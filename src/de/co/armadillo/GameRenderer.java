@@ -44,6 +44,14 @@ public class GameRenderer {
 		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY());
 		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY()-840);
 		
+		// Draw Health
+		for(int i = 0; i < world.getGameState().getHitpoints(); i++)
+			batch.draw(AssetLoader.health, 20+i*50, 770);
+		
+		// Draw Highscore
+		AssetLoader.highFont.draw(batch, "Score: " + world.getGameState().getScore(), 470, 770);
+		AssetLoader.highFont.draw(batch, "Stage: " + world.getGameState().getStage(), 470, 790);
+		
 		// Draw cross
 		batch.draw(AssetLoader.cross, 
 				world.getTarget().getEnd().x-35, 
@@ -63,6 +71,8 @@ public class GameRenderer {
 					world.getEnemy()[i].getEquation().getQuestion(), 
 					world.getEnemy()[i].getCircle().x-22, world.getEnemy()[i].getCircle().y-5);
 		}
+		
+		
 		batch.end();
 		
 		// Draw stage

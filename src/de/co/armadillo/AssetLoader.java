@@ -16,9 +16,11 @@ public class AssetLoader {
 	public static TextureRegion armadillo;
 	
 	public static BitmapFont font;
-	public static BitmapFont fontTitle;
+	public static BitmapFont highFont;
 	
 	public static TextureRegion title;
+	
+	public static TextureRegion health;
 	
 	public static TextureRegion pi;
 	public static TextureRegion binomial;
@@ -42,12 +44,20 @@ public class AssetLoader {
 		font = new BitmapFont();
 		font.setScale(1, -1);
 		
+		// Highscore font
+		highFont = new BitmapFont(Gdx.files.internal("data/font.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font.png"))), false);
+		highFont.setScale(1, -1);
+		
 		// Background
 		bg = new Texture("data/background.png");
 	
 		// Armadillo picture
 		armadillo = new TextureRegion(new Texture(Gdx.files.internal("data/armadillo.png")));
 		armadillo.flip(false, true);
+		
+		// Health
+		health = new TextureRegion(new Texture(Gdx.files.internal("data/health.png")));
+		health.flip(false, true);
 		
 		// Name
 		credits = new TextureRegion(new Texture(Gdx.files.internal("data/credits.png")));

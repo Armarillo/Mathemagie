@@ -18,12 +18,13 @@ public class GameWorld {
 	private Enemy[] enemy;
 	private Background background;
 	private GameCharacter character;
+	private GameState state;
 	private Stage stage;
 	private TextField tf;
 	private Projectile fire;
 	
 	// Amount of enemies
-	private int amount = 500;
+	private int amount = 3;
 	
 	// Target index
 	private int targetIndex = 0;
@@ -42,9 +43,8 @@ public class GameWorld {
 		enemy = new Enemy[amount];
 		
 		// Initialize enemies
-		for(int i = 0; i < enemy.length; i++) {
-			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(400), 50 + r.nextInt(50));
-		}
+		for(int i = 0; i < enemy.length; i++)
+			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
 		
 		// Get target aiming
 		target = new Target();
@@ -71,6 +71,9 @@ public class GameWorld {
 		
 		// Projectile which is destined to hit specific target
 		fire = new Projectile(target);
+		
+		// Create Game State, i.e. health, stage, highscore
+		state = new GameState(3);
 		
 		// Create Stage
 		stage = new Stage();
@@ -117,9 +120,6 @@ public class GameWorld {
 		// Update projectile
 		fire.update(delta);
 		
-		// Update aiming
-		target.update(enemy[targetArrange[targetIndex]]);
-		
 		// Check if projectile hit enemy
 		if(fire.checkCollision(enemy[targetArrange[targetIndex]].getCircle())) {
 			
@@ -132,7 +132,41 @@ public class GameWorld {
 			
 			// Focus next enemy
 			targetIndex++;
+			
+			// Add to score
+			state.addScore(2);
 		}
+		
+		System.out.println(targetIndex);
+		
+		if(targetIndex == amount) {
+			
+			// Set game state
+			state.nextStage();
+			
+			// Reset everything
+			targetIndex = 0;
+			
+			for(int i = 0; i < enemy.length; i++)
+				enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
+		}
+		
+		// Update aiming
+		target.update(enemy[targetArrange[targetIndex]]);
+				
+		
+		// Check if enemy hit bottom
+		for(int i = 0; i < enemy.length; i++)
+			if(enemy[i].getCircle().y > 840) {
+				
+				// Get rid of it and lose hitpoints
+				enemy[i].destroy();
+				state.loseHealth();
+				
+				// In case it was designated target, switch
+				if(enemy[i] == enemy[targetArrange[targetIndex]])
+					targetIndex++;
+			}
 	}
 
 	public GameCharacter getChar() {
@@ -165,5 +199,9 @@ public class GameWorld {
 	
 	public int getTargetIndex() {
 		return targetIndex;
+	}
+	
+	public GameState getGameState() {
+		return state;
 	}
 }
