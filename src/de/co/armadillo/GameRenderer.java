@@ -17,6 +17,8 @@ public class GameRenderer {
 	
 	private OrthographicCamera cam;
 	
+	private float runTime;
+	
 	public GameRenderer(GameWorld world) {
 		this.world = world;
 		
@@ -47,6 +49,15 @@ public class GameRenderer {
 		// Draw Health
 		for(int i = 0; i < world.getGameState().getHitpoints(); i++)
 			batch.draw(AssetLoader.health, 20+i*50, 770);
+		
+		// Draw current level
+		if(world.display() && runTime <= 1) {
+			AssetLoader.highFont.draw(batch, "New Stage", 300, 400);
+			runTime += delta;
+		}else{
+			world.setDisplay(false);
+			runTime = 0;
+		}
 		
 		// Draw Highscore
 		AssetLoader.highFont.draw(batch, "Score: " + world.getGameState().getScore(), 470, 770);
@@ -122,5 +133,4 @@ public class GameRenderer {
 		
 		shape.end();
 	}
-
 }

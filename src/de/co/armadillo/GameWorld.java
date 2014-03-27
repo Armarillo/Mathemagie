@@ -22,6 +22,7 @@ public class GameWorld {
 	private Stage stage;
 	private TextField tf;
 	private Projectile fire;
+	private boolean display;
 	
 	// Amount of enemies
 	private int amount = 3;
@@ -74,6 +75,9 @@ public class GameWorld {
 		
 		// Create Game State, i.e. health, stage, highscore
 		state = new GameState(3);
+		
+		// Variable for displaying warnings
+		display = false;
 		
 		// Create Stage
 		stage = new Stage();
@@ -137,23 +141,46 @@ public class GameWorld {
 			state.addScore(2);
 		}
 		
-		System.out.println(targetIndex);
-		
 		if(targetIndex == amount) {
 			
 			// Set game state
 			state.nextStage();
+			amount++;
+			
+			// Display message
+			display = true;
 			
 			// Reset everything
 			targetIndex = 0;
 			
+			//************************************************
+			enemy = new Enemy[amount];
+			
 			for(int i = 0; i < enemy.length; i++)
 				enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
+			
+			targetArrange = new int[amount];
+			
+			for(int i = 0; i < targetArrange.length; i++) {
+				targetArrange[i] = i;
+			}
+			
+			int temp, rand;
+			for(int i = targetArrange.length; i > 0; i--) {
+				rand = r.nextInt(i);
+				temp = targetArrange[rand];
+				targetArrange[rand] = targetArrange[i-1];
+				targetArrange[i-1] = temp;
+			}
+			
+			for(int i = 0; i < enemy.length; i++)
+				enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
+			
+			//************************************************
 		}
 		
 		// Update aiming
 		target.update(enemy[targetArrange[targetIndex]]);
-				
 		
 		// Check if enemy hit bottom
 		for(int i = 0; i < enemy.length; i++)
@@ -167,6 +194,14 @@ public class GameWorld {
 				if(enemy[i] == enemy[targetArrange[targetIndex]])
 					targetIndex++;
 			}
+	}
+	
+	public boolean display() {
+		return display;
+	}
+	
+	public void setDisplay(boolean state) {
+		display = state;
 	}
 
 	public GameCharacter getChar() {
