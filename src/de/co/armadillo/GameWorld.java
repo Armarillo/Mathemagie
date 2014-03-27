@@ -23,7 +23,7 @@ public class GameWorld {
 	private Projectile fire;
 	
 	// Amount of enemies
-	private int amount = 4;
+	private int amount = 500;
 	
 	// Target index
 	private int targetIndex = 0;
@@ -43,7 +43,7 @@ public class GameWorld {
 		
 		// Initialize enemies
 		for(int i = 0; i < enemy.length; i++) {
-			enemy[i] = new Enemy(r.nextInt(720), -r.nextInt(400), 50 + r.nextInt(50));
+			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(400), 50 + r.nextInt(50));
 		}
 		
 		// Get target aiming
@@ -52,18 +52,19 @@ public class GameWorld {
 		// Arrange Gegnerfolge (SEE: Test.java)
 		targetArrange = new int[amount];
 		
-		String arrangement = "";
-		
-		// Make an arrangement from 0 - amount, no number comes twice, every number comes once
-		while(arrangement.length() < amount) {
-			String newValue = String.valueOf(r.nextInt(amount));
-			if(!arrangement.contains(newValue))
-				arrangement += newValue;
+		// Make an arrangement from 0 - amount
+		for(int i = 0; i < targetArrange.length; i++) {
+			targetArrange[i] = i;
 		}
 		
-		// Convert string to array of integers
-		for(int i = 0; i < arrangement.length(); i++)
-			targetArrange[i] = Character.getNumericValue(arrangement.charAt(i));
+		// Fisher-Yates Shuffle
+		int temp, rand;
+		for(int i = targetArrange.length; i > 0; i--) {
+			rand = r.nextInt(i);
+			temp = targetArrange[rand];
+			targetArrange[rand] = targetArrange[i-1];
+			targetArrange[i-1] = temp;
+		}
 		
 		// Create Cannon, targeting the target
 		character = new GameCharacter(310, 700, target);

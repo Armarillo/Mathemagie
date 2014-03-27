@@ -41,10 +41,6 @@ public class AssetLoader {
 		// Font
 		font = new BitmapFont();
 		font.setScale(1, -1);
-
-		// Font for title
-		fontTitle = new BitmapFont();
-		fontTitle.setScale(2, -2);
 		
 		// Background
 		bg = new Texture("data/background.png");
@@ -85,7 +81,6 @@ public class AssetLoader {
 	
 	public static void dispose() {
 		font.dispose();
-		fontTitle.dispose();
 		bg.dispose();
 		menuMusic.dispose();
 		
