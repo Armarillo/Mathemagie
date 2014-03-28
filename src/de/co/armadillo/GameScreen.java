@@ -23,16 +23,21 @@ public class GameScreen implements Screen{
 		AssetLoader.menuMusic.setLooping(true);
 	}
 	
-	// The main loop of the game - it's heart, can you hear it beating?
+	// The main loop of the game - its heart, can you hear it beating?
 	@Override
 	public void render(float delta) {
 		world.update(delta);
 		renderer.render(delta);
 		
+		// Reset window and show lost screen
 		if(GameState.hitpoints == 0) {
 			world.resetLevel();
 			GameState.hitpoints = 3;
+			
+			GameState.lastScore = GameState.score;
 			GameState.score = 0;
+			
+			GameState.lastStage = GameState.stage;
 			GameState.stage = 1;
 			window.setScreen(new LostScreen(window, world));
 		}

@@ -46,16 +46,19 @@ public class GameMenu implements Screen{
 		});
 		stage.addActor(play);
 		
+		// Buttons
 		TextButton option = new TextButton("Options", AssetLoader.skin);
 		option.setSize(275, 50);
 		option.setPosition(223, 475);
 		stage.addActor(option);
 		
+		// Buttons
 		TextButton credits = new TextButton("Credits", AssetLoader.skin);
 		credits.setSize(275, 50);
 		credits.setPosition(223, 400);
 		stage.addActor(credits);
-		
+
+		// Buttons		
 		TextButton quit = new TextButton("Quit", AssetLoader.skin);
 		quit.setSize(275, 50);
 		quit.setPosition(223, 325);
@@ -70,9 +73,12 @@ public class GameMenu implements Screen{
 	
 	@Override
 	public void render(float delta) {
+		
+		// Clear screen
 		Gdx.gl.glClearColor(0/255.0f, 0/255.0f, 0/255.0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
+		// Add stage
 		stage.act(delta);
 		stage.draw();
 		
