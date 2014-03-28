@@ -17,6 +17,11 @@ public class GameCharacter {
 		cannon = new Rectangle(x+20, y-20, 10, 20);
 	}
 	
+	public void destroy() {
+		rect.setPosition(900, 900);
+		cannon.setPosition(900, 900);
+	}
+	
 	public float getRotation() {
 		return target.getAngle();
 	}

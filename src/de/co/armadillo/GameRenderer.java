@@ -14,7 +14,6 @@ public class GameRenderer {
 
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
-	
 	private OrthographicCamera cam;
 	
 	private float runTime;
@@ -46,22 +45,24 @@ public class GameRenderer {
 		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY());
 		batch.draw(AssetLoader.bg, world.getBackground().getX(), world.getBackground().getY()-840);
 		
+		world.getGameState();
+		
 		// Draw Health
-		for(int i = 0; i < world.getGameState().getHitpoints(); i++)
+		for(int i = 0; i < GameState.hitpoints; i++)
 			batch.draw(AssetLoader.health, 20+i*50, 770);
 		
-		// Draw current level
-		if(world.display() && runTime <= 1) {
+		// Draw new stage message
+		if(world.displayNewStage() && runTime <= 1) {
 			AssetLoader.highFont.draw(batch, "New Stage", 300, 400);
 			runTime += delta;
 		}else{
-			world.setDisplay(false);
+			world.setDisplayNewStage(false);
 			runTime = 0;
 		}
 		
 		// Draw Highscore
-		AssetLoader.highFont.draw(batch, "Score: " + world.getGameState().getScore(), 470, 770);
-		AssetLoader.highFont.draw(batch, "Stage: " + world.getGameState().getStage(), 470, 790);
+		AssetLoader.highFont.draw(batch, "Score: " + GameState.score, 470, 770);
+		AssetLoader.highFont.draw(batch, "Stage: " + GameState.stage, 470, 790);
 		
 		// Draw cross
 		batch.draw(AssetLoader.cross, 

@@ -33,7 +33,7 @@ public class GameWorld {
 	// Target arrangement
 	private int[] targetArrange;
 	
-	public GameWorld() {
+	public GameWorld(GameState state) {
 		
 		r = new Random();
 		
@@ -74,7 +74,7 @@ public class GameWorld {
 		fire = new Projectile(target);
 		
 		// Create Game State, i.e. health, stage, highscore
-		state = new GameState(3);
+		this.state = state;
 		
 		// Variable for displaying warnings
 		display = false;
@@ -124,6 +124,25 @@ public class GameWorld {
 		// Update projectile
 		fire.update(delta);
 		
+		// Check if enemy hit bottom
+		for(int i = 0; i < enemy.length; i++) {
+			if(enemy[i].getCircle().y > 840) {
+				
+				// Get rid of it and lose hitpoints
+				enemy[i].destroy();
+				GameState.hitpoints -= 1;
+				
+				// In case it was designated target, switch
+				if(enemy[i] == enemy[targetArrange[targetIndex]] && amount != targetIndex)
+					targetIndex++;
+			}
+		}
+		
+		// Reset levevl
+		if(targetIndex == amount) {
+			resetLevel();
+		}
+		
 		// Check if projectile hit enemy
 		if(fire.checkCollision(enemy[targetArrange[targetIndex]].getCircle())) {
 			
@@ -138,69 +157,59 @@ public class GameWorld {
 			targetIndex++;
 			
 			// Add to score
-			state.addScore(2);
+			GameState.score += 2;
 		}
 		
+		// Reset level
 		if(targetIndex == amount) {
-			
-			// Set game state
-			state.nextStage();
-			amount++;
-			
-			// Display message
-			display = true;
-			
-			// Reset everything
-			targetIndex = 0;
-			
-			//************************************************
-			enemy = new Enemy[amount];
-			
-			for(int i = 0; i < enemy.length; i++)
-				enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
-			
-			targetArrange = new int[amount];
-			
-			for(int i = 0; i < targetArrange.length; i++) {
-				targetArrange[i] = i;
-			}
-			
-			int temp, rand;
-			for(int i = targetArrange.length; i > 0; i--) {
-				rand = r.nextInt(i);
-				temp = targetArrange[rand];
-				targetArrange[rand] = targetArrange[i-1];
-				targetArrange[i-1] = temp;
-			}
-			
-			for(int i = 0; i < enemy.length; i++)
-				enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
-			
-			//************************************************
+			resetLevel();
 		}
 		
 		// Update aiming
 		target.update(enemy[targetArrange[targetIndex]]);
-		
-		// Check if enemy hit bottom
-		for(int i = 0; i < enemy.length; i++)
-			if(enemy[i].getCircle().y > 840) {
-				
-				// Get rid of it and lose hitpoints
-				enemy[i].destroy();
-				state.loseHealth();
-				
-				// In case it was designated target, switch
-				if(enemy[i] == enemy[targetArrange[targetIndex]])
-					targetIndex++;
-			}
 	}
 	
-	public boolean display() {
+	public void resetLevel() {
+		
+		// Set game state
+		GameState.stage += 1;
+		amount++;
+		
+		// Display message
+		display = true;
+		
+		// Reset everything
+		targetIndex = 0;
+		
+		// Everything copied from the constructor basically
+		enemy = new Enemy[amount];
+		
+		for(int i = 0; i < enemy.length; i++)
+			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
+		
+		targetArrange = new int[amount];
+		
+		for(int i = 0; i < targetArrange.length; i++) {
+			targetArrange[i] = i;
+		}
+		
+		int temp, rand;
+		for(int i = targetArrange.length; i > 0; i--) {
+			rand = r.nextInt(i);
+			temp = targetArrange[rand];
+			targetArrange[rand] = targetArrange[i-1];
+			targetArrange[i-1] = temp;
+		}
+		
+		for(int i = 0; i < enemy.length; i++)
+			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
+	}
+	
+	public boolean displayNewStage() {
 		return display;
 	}
 	
-	public void setDisplay(boolean state) {
+	public void setDisplayNewStage(boolean state) {
 		display = state;
 	}
 

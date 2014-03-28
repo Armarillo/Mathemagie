@@ -40,7 +40,7 @@ public class GameMenu implements Screen{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.menuMusic.stop();
-				window.setScreen(new GameScreen());
+				window.setScreen(new GameScreen(window));
 			
 			}
 		});

@@ -17,6 +17,7 @@ public class AssetLoader {
 	
 	public static BitmapFont font;
 	public static BitmapFont highFont;
+	public static BitmapFont bigFont;
 	
 	public static TextureRegion title;
 	
@@ -47,6 +48,10 @@ public class AssetLoader {
 		// Highscore font
 		highFont = new BitmapFont(Gdx.files.internal("data/font.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font.png"))), false);
 		highFont.setScale(1, -1);
+
+		// Highscore font
+		bigFont = new BitmapFont(Gdx.files.internal("data/font.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font.png"))), false);
+		bigFont.setScale(2, -2);
 		
 		// Background
 		bg = new Texture("data/background.png");

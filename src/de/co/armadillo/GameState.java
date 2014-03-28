@@ -2,15 +2,9 @@ package de.co.armadillo;
 
 public class GameState {
 
-	private int hitpoints;
-	private int stage;
-	private int score;
-	
-	public GameState(int hitpoints) {
-		this.hitpoints = hitpoints;
-		score = 0;
-		stage = 1;
-	}
+	public static int hitpoints = 3;
+	public static int stage = 1;
+	public static int score = 0;
 	
 	public void nextStage() {
 		stage++;
@@ -22,6 +16,13 @@ public class GameState {
 	
 	public void loseHealth() {
 		hitpoints--;
+	}
+	
+	public static boolean isGameOver() {
+		if(hitpoints == 0)
+			return true;
+		else
+			return false;
 	}
 	
 	public int getHitpoints() {

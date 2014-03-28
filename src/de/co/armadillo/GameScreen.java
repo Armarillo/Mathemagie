@@ -6,11 +6,16 @@ public class GameScreen implements Screen{
 
 	private GameWorld world;
 	private GameRenderer renderer;
+	private GameState state;
+	private GameWindow window;
 	
-	public GameScreen() {
+	public GameScreen(GameWindow window) {
+		
+		// Get object to change screen if necessary
+		this.window = window;
 		
 		// Initialize fundament
-		world = new GameWorld();
+		world = new GameWorld(state);
 		renderer = new GameRenderer(world);
 		
 		// Play music
@@ -23,6 +28,14 @@ public class GameScreen implements Screen{
 	public void render(float delta) {
 		world.update(delta);
 		renderer.render(delta);
+		
+		if(GameState.hitpoints == 0) {
+			world.resetLevel();
+			GameState.hitpoints = 3;
+			GameState.score = 0;
+			GameState.stage = 1;
+			window.setScreen(new LostScreen(window, world));
+		}
 	}
 
 	// Window methods
