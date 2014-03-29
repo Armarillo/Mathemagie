@@ -9,4 +9,7 @@ public class GameState {
 	public static int lastScore = 0;
 	public static int lastStage = 0;
 	
+	public static boolean musicMute = false;
+	public static boolean soundMute = false;
+	public static boolean fullscreen = false;
 }

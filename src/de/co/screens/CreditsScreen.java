@@ -57,14 +57,14 @@ public class CreditsScreen implements Screen{
 		batch.begin();
 		
 		AssetLoader.highFont.setColor(255/255.0f, 165/255.0f, 0/255.0f, 1f);
-		AssetLoader.highFont.draw(batch, "Designed and", 223, 200);
-		AssetLoader.highFont.draw(batch, "Programmed by", 223, 220);
-		AssetLoader.highFont.draw(batch, "Music by", 223, 300);
+		AssetLoader.highFont.draw(batch, "Designed and", 223, 240);
+		AssetLoader.highFont.draw(batch, "Programmed by", 223, 260);
+		AssetLoader.highFont.draw(batch, "Music by", 223, 320);
 		AssetLoader.highFont.draw(batch, "For", 223, 380);
 		
 		AssetLoader.highFont.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
-		AssetLoader.highFont.draw(batch, "Julien Midedji", 385, 240);
-		AssetLoader.highFont.draw(batch, "Jake Chudnow", 380, 320);
+		AssetLoader.highFont.draw(batch, "Julien Midedji", 385, 280);
+		AssetLoader.highFont.draw(batch, "Jake Chudnow", 380, 340);
 		AssetLoader.highFont.draw(batch, "Armadillo Production", 325, 400);
 		
 		// title

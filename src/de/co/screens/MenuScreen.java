@@ -30,7 +30,7 @@ public class MenuScreen implements Screen{
 		// Make stage
 		stage = new Stage();
 		
-		// Buttons
+		// Play Button
 		TextButton play = new TextButton("Play", AssetLoader.skin);
 		play.setSize(275, 50);
 		play.setPosition(223, 550);
@@ -44,13 +44,19 @@ public class MenuScreen implements Screen{
 		});
 		stage.addActor(play);
 		
-		// Buttons
+		// Option Button
 		TextButton option = new TextButton("Options", AssetLoader.skin);
 		option.setSize(275, 50);
 		option.setPosition(223, 475);
+		option.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				window.setScreen(new OptionScreen(window));
+			}
+		});
 		stage.addActor(option);
 		
-		// Buttons
+		// Credits Button
 		TextButton credits = new TextButton("Credits", AssetLoader.skin);
 		credits.setSize(275, 50);
 		credits.setPosition(223, 400);
