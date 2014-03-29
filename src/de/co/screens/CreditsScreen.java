@@ -13,13 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import de.co.armadillo.engine.AssetLoader;
 import de.co.armadillo.engine.GameWindow;
 
-public class MenuScreen implements Screen{
+public class CreditsScreen implements Screen{
 
 	private SpriteBatch batch;
 	private OrthographicCamera cam;
 	private Stage stage;
 	
-	public MenuScreen(final GameWindow window) {
+	public CreditsScreen(final GameWindow window) {
 		
 		cam = new OrthographicCamera();
 		cam.setToOrtho(true);
@@ -29,50 +29,18 @@ public class MenuScreen implements Screen{
 		
 		// Make stage
 		stage = new Stage();
-		
-		// Buttons
-		TextButton play = new TextButton("Play", AssetLoader.skin);
-		play.setSize(275, 50);
-		play.setPosition(223, 550);
-		play.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				AssetLoader.menuMusic.stop();
-				window.setScreen(new GameScreen(window));
-			
-			}
-		});
-		stage.addActor(play);
-		
-		// Buttons
-		TextButton option = new TextButton("Options", AssetLoader.skin);
-		option.setSize(275, 50);
-		option.setPosition(223, 475);
-		stage.addActor(option);
-		
-		// Buttons
-		TextButton credits = new TextButton("Credits", AssetLoader.skin);
-		credits.setSize(275, 50);
-		credits.setPosition(223, 400);
-		credits.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				window.setScreen(new CreditsScreen(window));
-			}
-		});
-		stage.addActor(credits);
 
 		// Buttons		
-		TextButton quit = new TextButton("Quit", AssetLoader.skin);
-		quit.setSize(275, 50);
-		quit.setPosition(223, 325);
-		quit.addListener(new ClickListener() {
+		TextButton back = new TextButton("Back", AssetLoader.skin);
+		back.setSize(325, 50);
+		back.setPosition(200, 325);
+		back.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				System.exit(0);
+				window.setScreen(new MenuScreen(window));
 			}
 		});
-		stage.addActor(quit);
+		stage.addActor(back);
 	}
 	
 	@Override
@@ -87,7 +55,18 @@ public class MenuScreen implements Screen{
 		stage.draw();
 		
 		batch.begin();
-
+		
+		AssetLoader.highFont.setColor(255/255.0f, 165/255.0f, 0/255.0f, 1f);
+		AssetLoader.highFont.draw(batch, "Designed and", 223, 200);
+		AssetLoader.highFont.draw(batch, "Programmed by", 223, 220);
+		AssetLoader.highFont.draw(batch, "Music by", 223, 300);
+		AssetLoader.highFont.draw(batch, "For", 223, 380);
+		
+		AssetLoader.highFont.setColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
+		AssetLoader.highFont.draw(batch, "Julien Midedji", 385, 240);
+		AssetLoader.highFont.draw(batch, "Jake Chudnow", 380, 320);
+		AssetLoader.highFont.draw(batch, "Armadillo Production", 325, 400);
+		
 		// title
 		batch.draw(AssetLoader.title, 136, 100, 0, 0, 299, 57, 1.5f, 1.5f, 0);
 		

@@ -47,9 +47,13 @@ public class NameScreen implements Screen {
 		}
 		
 		// Change screen
-		if(runTime >= 5)
+		if(runTime >= 5) {
+
+			// Play music
+			AssetLoader.menuMusic.loop();
 			window.setScreen(new MenuScreen(window));
-		
+		}
+			
 		// Clear screen
 		Gdx.gl.glClearColor(0/255.0f, 0/255.0f, 0/255.0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
