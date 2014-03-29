@@ -1,7 +1,7 @@
 package de.co.armadillo;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -27,8 +27,7 @@ public class AssetLoader {
 	public static TextureRegion complex;
 	public static TextureRegion squareroot;
 	
-	public static Music menuMusic;
-	public static Music gameMusic;
+	public static Sound menuMusic;
 	
 	public static Skin skin;
 	
@@ -68,8 +67,7 @@ public class AssetLoader {
 		credits.flip(false, true);
 		
 		// Music
-		menuMusic = Gdx.audio.newMusic(Gdx.files.internal("data/menuMusic.wav"));
-		//gameMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gameMusic.wav"));
+		menuMusic = Gdx.audio.newSound(Gdx.files.internal("data/menumusic.wav"));
 		
 		// Skin
 		skin = new Skin(Gdx.files.internal("data/uiskin.json"));

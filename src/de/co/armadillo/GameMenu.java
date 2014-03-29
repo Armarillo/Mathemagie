@@ -25,9 +25,8 @@ public class GameMenu implements Screen{
 		batch.setProjectionMatrix(cam.combined);
 		
 		// Play music
-		AssetLoader.menuMusic.play();
-		AssetLoader.menuMusic.setLooping(true);
-		AssetLoader.menuMusic.setVolume(0.5f);
+		AssetLoader.menuMusic.loop();
+
 		
 		// Make stage
 		stage = new Stage();
