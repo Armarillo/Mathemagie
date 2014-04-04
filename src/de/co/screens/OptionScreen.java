@@ -32,16 +32,24 @@ public class OptionScreen implements Screen{
 		// Make stage
 		stage = new Stage();
 		
+		String label;
+		
+		if(GameState.musicMute) label = "  OFF";
+		else label = "  ON";
+		
 		// Textfield for sound
-		final TextField tfSound = new TextField("  ON", AssetLoader.skin);
+		final TextField tfSound = new TextField(label, AssetLoader.skin);
 		tfSound.setDisabled(true);
 		tfSound.setPosition(430, 550);
 		tfSound.setSize(55, 50);
 		tfSound.setMaxLength(9);
 		stage.addActor(tfSound);
 		
+		if(GameState.soundMute) label = "  OFF";
+		else label = "  ON";
+		
 		// Textfield for sfx
-		final TextField tfSFX = new TextField("  ON", AssetLoader.skin);
+		final TextField tfSFX = new TextField(label, AssetLoader.skin);
 		tfSFX.setDisabled(true);
 		tfSFX.setPosition(430, 475);
 		tfSFX.setSize(55, 50);
@@ -64,10 +72,13 @@ public class OptionScreen implements Screen{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				if(!GameState.musicMute) {
+					AssetLoader.click.play();
 					AssetLoader.menuMusic.stop();
 					GameState.musicMute = true;
 					tfSound.setText("  OFF");
 				}else{
+					AssetLoader.click.play();
+					AssetLoader.menuMusic.stop();
 					AssetLoader.menuMusic.loop();
 					GameState.musicMute = false;
 					tfSound.setText("  ON");
@@ -83,12 +94,15 @@ public class OptionScreen implements Screen{
 		muteSound.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				AssetLoader.click.play();
 				if(!GameState.soundMute) {
 					GameState.soundMute = true;
 					tfSFX.setText("  OFF");
+					AssetLoader.disposeSound();
 				}else{
 					GameState.soundMute = false;
 					tfSFX.setText("  ON");
+					AssetLoader.loadSound();
 				}
 			}
 		});
@@ -98,9 +112,10 @@ public class OptionScreen implements Screen{
 		TextButton fullscreen = new TextButton("Fullscreen", AssetLoader.skin);
 		fullscreen.setSize(175, 50);
 		fullscreen.setPosition(230, 400);
-		fullscreen.addListener(new ClickListener() {
+		/*fullscreen.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				AssetLoader.click.play();
 				if(!GameState.fullscreen) {
 					Gdx.graphics.setDisplayMode(Gdx.graphics.getDesktopDisplayMode().width, Gdx.graphics.getDesktopDisplayMode().height, true);
 					GameState.fullscreen = true;
@@ -111,7 +126,7 @@ public class OptionScreen implements Screen{
 					tfFullscreen.setText("  OFF");
 				}
 			}
-		});
+		});*/
 		stage.addActor(fullscreen);
 
 		// Back button		
@@ -121,7 +136,8 @@ public class OptionScreen implements Screen{
 		back.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				
+				AssetLoader.click.play();
+				window.setScreen(new MenuScreen(window));
 			}
 		});
 		stage.addActor(back);

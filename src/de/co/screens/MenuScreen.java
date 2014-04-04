@@ -51,6 +51,7 @@ public class MenuScreen implements Screen{
 		option.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				AssetLoader.click.play();
 				window.setScreen(new OptionScreen(window));
 			}
 		});
@@ -63,6 +64,7 @@ public class MenuScreen implements Screen{
 		credits.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				AssetLoader.click.play();
 				window.setScreen(new CreditsScreen(window));
 			}
 		});
@@ -75,6 +77,7 @@ public class MenuScreen implements Screen{
 		quit.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				AssetLoader.click.play();
 				System.exit(0);
 			}
 		});
@@ -94,19 +97,10 @@ public class MenuScreen implements Screen{
 		
 		batch.begin();
 
-		// title
 		batch.draw(AssetLoader.title, 136, 100, 0, 0, 299, 57, 1.5f, 1.5f, 0);
-		
-		// pi
 		batch.draw(AssetLoader.pi, 100, 200, 0, 0, 168, 160, 0.25f, 0.25f, -10);
-		
-		// binomial
 		batch.draw(AssetLoader.binomial, 400, 570, 0, 0, 83, 20, 1, 1, 10);
-		
-		// complex
 		batch.draw(AssetLoader.complex, 500, 20, 0, 0, 35, 18, 1, 1, -5);
-		
-		// square root
 		batch.draw(AssetLoader.squareroot, 100, 700, 0, 0, 120, 94, 1, 1, 5);
 		
 		batch.end();

@@ -22,7 +22,7 @@ public class LostScreen implements Screen{
 	private Stage stage;
 	private GameWorld world;
 	
-	public LostScreen(final GameWindow window, GameWorld world) {
+	public LostScreen(final GameWindow window, GameWorld world, long id) {
 		
 		// Get instance of world
 		this.world = world;
@@ -46,6 +46,7 @@ public class LostScreen implements Screen{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.menuMusic.stop();
+				if(!GameState.musicMute) AssetLoader.click.play();
 				window.setScreen(new GameScreen(window));
 			}
 		});
@@ -58,11 +59,14 @@ public class LostScreen implements Screen{
 		menu.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				AssetLoader.menuMusic.stop();
+				if(!GameState.musicMute) AssetLoader.click.play();
 				window.setScreen(new MenuScreen(window));
 			}
 		});
 		stage.addActor(menu);
+		
+		// Lower volume
+		AssetLoader.menuMusic.setVolume(id, 0.5f);
 	}
 	
 	@Override

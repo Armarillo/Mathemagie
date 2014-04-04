@@ -28,6 +28,10 @@ public class AssetLoader {
 	public static TextureRegion squareroot;
 	
 	public static Sound menuMusic;
+	public static Sound shoot;
+	public static Sound blob;
+	public static Sound right;
+	public static Sound click;
 	
 	public static Skin skin;
 	
@@ -38,18 +42,6 @@ public class AssetLoader {
 		
 		// Cross
 		cross = new TextureRegion(new Texture(Gdx.files.internal("data/game/cross.png")));
-		
-		// Font
-		font = new BitmapFont();
-		font.setScale(1, -1);
-		
-		// Highscore font
-		highFont = new BitmapFont(Gdx.files.internal("data/font/font.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font/font.png"))), false);
-		highFont.setScale(1, -1);
-
-		// Highscore font
-		bigFont = new BitmapFont(Gdx.files.internal("data/font/bigfont.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font/bigfont.png"))), false);
-		bigFont.setScale(1, -1);
 		
 		// Background
 		bg = new Texture("data/game/background.png");
@@ -66,9 +58,6 @@ public class AssetLoader {
 		credits = new TextureRegion(new Texture(Gdx.files.internal("data/menu/credits.png")));
 		credits.flip(false, true);
 		
-		// Music
-		menuMusic = Gdx.audio.newSound(Gdx.files.internal("data/misc/menumusic.wav"));
-		
 		// Skin
 		skin = new Skin(Gdx.files.internal("data/misc/uiskin.json"));
 		
@@ -78,24 +67,49 @@ public class AssetLoader {
 		
 		// Mathmatical signs
 		pi = new TextureRegion(new Texture(Gdx.files.internal("data/menu/pi.png")));
-		pi.flip(false, true);
-		
-		binomial = new TextureRegion(new Texture(Gdx.files.internal("data/menu/a2abb.png")));
-		binomial.flip(false, true);
-		
-		complex = new TextureRegion(new Texture(Gdx.files.internal("data/menu/abi.png")));
-		complex.flip(false, true);
-		
 		squareroot = new TextureRegion(new Texture(Gdx.files.internal("data/menu/squareroot.png")));
+		binomial = new TextureRegion(new Texture(Gdx.files.internal("data/menu/a2abb.png")));
+		complex = new TextureRegion(new Texture(Gdx.files.internal("data/menu/abi.png")));
+		
+		pi.flip(false, true);
+		binomial.flip(false, true);
+		complex.flip(false, true);
 		squareroot.flip(false, true);
 		
+		// Sounds
+		loadSound();
+		
+		// Font
+		font = new BitmapFont();
+		font.setScale(1, -1);
+		highFont = new BitmapFont(Gdx.files.internal("data/font/font.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font/font.png"))), false);
+		highFont.setScale(1, -1);
+		bigFont = new BitmapFont(Gdx.files.internal("data/font/bigfont.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font/bigfont.png"))), false);
+		bigFont.setScale(1, -1);
+		
+	}
+	
+	public static void loadSound() {
+		menuMusic = Gdx.audio.newSound(Gdx.files.internal("data/sound/menumusic.wav"));
+		shoot = Gdx.audio.newSound(Gdx.files.internal("data/sound/shoot.wav"));
+		blob = Gdx.audio.newSound(Gdx.files.internal("data/sound/blob.wav"));
+		right = Gdx.audio.newSound(Gdx.files.internal("data/sound/right.wav"));
+		click = Gdx.audio.newSound(Gdx.files.internal("data/sound/click.wav"));
+	}
+	
+	public static void disposeSound() {
+		shoot.dispose();
+		blob.dispose();
+		right.dispose();
+		click.dispose();
 	}
 	
 	public static void dispose() {
 		font.dispose();
+		highFont.dispose();
+		bigFont.dispose();
 		bg.dispose();
 		menuMusic.dispose();
-		
 		
 	}
 }

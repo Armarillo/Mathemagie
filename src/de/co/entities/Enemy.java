@@ -8,7 +8,7 @@ public class Enemy {
 	private Vector2 position;
 	private Vector2 velocity;
 	private Circle circle;
-	private Equation equation;
+	private Equation easyEquation;
 	
 	private boolean isHit = false;
 	
@@ -18,8 +18,8 @@ public class Enemy {
 		
 		circle = new Circle(x, y, 40);
 		
-		equation = new Equation(0);
-		equation.getQuestion();
+		easyEquation = new EasyEquation();
+		easyEquation.getQuestion();
 	}
 	
 	public void update(float delta) {
@@ -50,6 +50,6 @@ public class Enemy {
 	}
 	
 	public Equation getEquation() {
-		return equation;
+		return easyEquation;
 	}
 }

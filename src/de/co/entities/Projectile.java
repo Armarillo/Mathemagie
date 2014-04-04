@@ -36,8 +36,8 @@ public class Projectile {
 	}
 	
 	public void shoot(Enemy enemy) {
-		velocity.x = 355;
-		velocity.y = 725;
+		velocity.x = 355*2;
+		velocity.y = 725*2;
 		velocity.setAngle(target.getAngle()-90);
 	}
 	

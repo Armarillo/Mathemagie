@@ -10,6 +10,7 @@ public class GameScreen implements Screen{
 	private GameRenderer renderer;
 	private GameState state;
 	private GameWindow window;
+	private long id;
 	
 	public GameScreen(GameWindow window) {
 		
@@ -21,7 +22,7 @@ public class GameScreen implements Screen{
 		renderer = new GameRenderer(world);
 		
 		// Play music
-		AssetLoader.menuMusic.loop();
+		if(!GameState.musicMute) id =AssetLoader.menuMusic.loop();
 	}
 	
 	// The main loop of the game - its heart, can you hear it beating?
@@ -40,7 +41,7 @@ public class GameScreen implements Screen{
 			
 			GameState.lastStage = GameState.stage;
 			GameState.stage = 1;
-			window.setScreen(new LostScreen(window, world));
+			window.setScreen(new LostScreen(window, world, id));
 		}
 	}
 

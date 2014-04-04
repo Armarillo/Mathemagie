@@ -47,7 +47,7 @@ public class GameWorld {
 		
 		// Initialize enemies
 		for(int i = 0; i < enemy.length; i++)
-			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(100), 50 + r.nextInt(50));
+			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(10)-30, 10 + r.nextInt(50));
 		
 		// Get target aiming
 		target = new Target();
@@ -100,6 +100,7 @@ public class GameWorld {
 					if(enemy[targetArrange[targetIndex]].getEquation().checkAnswer(Integer.valueOf(tf.getText()))) {
 						tf.setText("");
 						fire.shoot(enemy[targetArrange[targetIndex]]);
+						AssetLoader.right.play();
 					}else if(key == '\n' || key == '\r') {
 						tf.setText("");
 					}
@@ -128,8 +129,11 @@ public class GameWorld {
 			if(enemy[i].getCircle().y > 840) {
 				
 				// Get rid of it and lose hitpoints
+				enemy[i].gotHit();
 				enemy[i].destroy();
 				GameState.hitpoints -= 1;
+				
+				amount--;
 				
 				// In case it was designated target, switch
 				if(enemy[i] == enemy[targetArrange[targetIndex]] && amount != targetIndex)
@@ -137,13 +141,18 @@ public class GameWorld {
 			}
 		}
 		
-		// Reset levevl
+		System.out.println(targetIndex + " : " + amount);
+		
+		// Reset level
 		if(targetIndex == amount) {
 			resetLevel();
 		}
 		
 		// Check if projectile hit enemy
 		if(fire.checkCollision(enemy[targetArrange[targetIndex]].getCircle())) {
+			
+			// Play sound
+			AssetLoader.blob.play();
 			
 			// Set enemy status
 			enemy[targetArrange[targetIndex]].gotHit();
