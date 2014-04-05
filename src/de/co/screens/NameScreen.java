@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL10;
 import de.co.armadillo.engine.AssetLoader;
 import de.co.armadillo.engine.GameWindow;
 
-public class NameScreen implements Screen {
+public class NameScreen extends SelectionScreen implements Screen {
 
 	private GameWindow window;
 	
@@ -58,35 +58,11 @@ public class NameScreen implements Screen {
 		Gdx.gl.glClearColor(0/255.0f, 0/255.0f, 0/255.0f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
-		window.batch.begin();
-		
-		window.batch.setColor(1f, 1f, 1f, fade);
-		
 		// Draw picture
+		window.batch.begin();
+		window.batch.setColor(1f, 1f, 1f, fade);
 		window.batch.draw(AssetLoader.credits, 57, 840/2-57);
-		
 		window.batch.end();
 		
 	}
-
-	@Override
-	public void resize(int width, int height) {
-		
-	}
-
-	@Override
-	public void show() {}
-
-	@Override
-	public void hide() {}
-
-	@Override
-	public void pause() {}
-
-	@Override
-	public void resume() {}
-
-	@Override
-	public void dispose() {}
-
 }

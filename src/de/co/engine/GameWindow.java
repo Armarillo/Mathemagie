@@ -30,6 +30,7 @@ public class GameWindow extends Game{
 		
 		AssetLoader.load();
 		setScreen(new PictureScreen(this));
+		
 	}
 	
 	@Override
