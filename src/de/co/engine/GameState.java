@@ -12,4 +12,6 @@ public class GameState {
 	public static boolean musicMute = false;
 	public static boolean soundMute = false;
 	public static boolean fullscreen = false;
+	
+	public static int difficulty; 
 }

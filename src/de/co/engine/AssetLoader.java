@@ -77,6 +77,7 @@ public class AssetLoader {
 		squareroot.flip(false, true);
 		
 		// Sounds
+		menuMusic = Gdx.audio.newSound(Gdx.files.internal("data/sound/menumusic.wav"));
 		loadSound();
 		
 		// Font
@@ -90,7 +91,6 @@ public class AssetLoader {
 	}
 	
 	public static void loadSound() {
-		menuMusic = Gdx.audio.newSound(Gdx.files.internal("data/sound/menumusic.wav"));
 		shoot = Gdx.audio.newSound(Gdx.files.internal("data/sound/shoot.wav"));
 		blob = Gdx.audio.newSound(Gdx.files.internal("data/sound/blob.wav"));
 		right = Gdx.audio.newSound(Gdx.files.internal("data/sound/right.wav"));

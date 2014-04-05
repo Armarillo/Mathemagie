@@ -3,12 +3,14 @@ package de.co.armadillo.entities;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
+import de.co.armadillo.engine.GameState;
+
 public class Enemy {
 
 	private Vector2 position;
 	private Vector2 velocity;
 	private Circle circle;
-	private Equation easyEquation;
+	private Equation equation;
 	
 	private boolean isHit = false;
 	
@@ -18,8 +20,20 @@ public class Enemy {
 		
 		circle = new Circle(x, y, 40);
 		
-		easyEquation = new EasyEquation();
-		easyEquation.getQuestion();
+		switch(GameState.difficulty) {
+		case 0: 
+			equation = new EasyEquation();
+			equation.getQuestion();
+			break;
+		case 1: 
+			//equation = new MediumEquation();
+			equation.getQuestion();
+			break;
+		case 2:
+			//equation = new HardEquation();
+			equation.getQuestion();
+			break;
+		}
 	}
 	
 	public void update(float delta) {
@@ -27,7 +41,6 @@ public class Enemy {
 		// Move enemy
 		position.add(velocity.cpy().scl(delta));
 		circle.setPosition(position.x, position.y);
-		
 	}
 	
 	public void destroy() {
@@ -50,6 +63,6 @@ public class Enemy {
 	}
 	
 	public Equation getEquation() {
-		return easyEquation;
+		return equation;
 	}
 }

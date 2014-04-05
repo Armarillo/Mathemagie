@@ -71,13 +71,17 @@ public class OptionScreen implements Screen{
 		muteMusic.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				
+				AssetLoader.click.play();
+				
+				// Mute
 				if(!GameState.musicMute) {
-					AssetLoader.click.play();
 					AssetLoader.menuMusic.stop();
 					GameState.musicMute = true;
 					tfSound.setText("  OFF");
+
+				// Unmute
 				}else{
-					AssetLoader.click.play();
 					AssetLoader.menuMusic.stop();
 					AssetLoader.menuMusic.loop();
 					GameState.musicMute = false;

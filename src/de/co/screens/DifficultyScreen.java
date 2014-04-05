@@ -11,15 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import de.co.armadillo.engine.AssetLoader;
+import de.co.armadillo.engine.GameState;
 import de.co.armadillo.engine.GameWindow;
 
-public class MenuScreen implements Screen{
+public class DifficultyScreen implements Screen{
 
 	private SpriteBatch batch;
 	private OrthographicCamera cam;
 	private Stage stage;
 	
-	public MenuScreen(final GameWindow window) {
+	public DifficultyScreen(final GameWindow window) {
 		
 		cam = new OrthographicCamera();
 		cam.setToOrtho(true);
@@ -30,57 +31,50 @@ public class MenuScreen implements Screen{
 		// Make stage
 		stage = new Stage();
 		
-		// Play Button
-		TextButton play = new TextButton("Play", AssetLoader.skin);
+		// Easy Button
+		TextButton play = new TextButton("Rookie", AssetLoader.skin);
 		play.setSize(275, 50);
 		play.setPosition(223, 550);
 		play.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.click.play();
-				window.setScreen(new DifficultyScreen(window));
+				AssetLoader.menuMusic.stop();
+				window.setScreen(new GameScreen(window));
+				GameState.difficulty = 0;
 			}
 		});
 		stage.addActor(play);
 		
-		// Option Button
-		TextButton option = new TextButton("Options", AssetLoader.skin);
+		// Medium Button
+		TextButton option = new TextButton("Mathter", AssetLoader.skin);
 		option.setSize(275, 50);
-		option.setPosition(223, 475);
+		option.setPosition(223, 450);
 		option.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.click.play();
-				window.setScreen(new OptionScreen(window));
+				AssetLoader.menuMusic.stop();
+				window.setScreen(new GameScreen(window));
+				GameState.difficulty = 1;
 			}
 		});
 		stage.addActor(option);
 		
-		// Credits Button
-		TextButton credits = new TextButton("Credits", AssetLoader.skin);
+		// Hard Button
+		TextButton credits = new TextButton("Impossibru", AssetLoader.skin);
 		credits.setSize(275, 50);
-		credits.setPosition(223, 400);
+		credits.setPosition(223, 350);
 		credits.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.click.play();
-				window.setScreen(new CreditsScreen(window));
+				AssetLoader.menuMusic.stop();
+				window.setScreen(new GameScreen(window));
+				GameState.difficulty = 2;
 			}
 		});
 		stage.addActor(credits);
-
-		// Buttons		
-		TextButton quit = new TextButton("Quit", AssetLoader.skin);
-		quit.setSize(275, 50);
-		quit.setPosition(223, 325);
-		quit.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				AssetLoader.click.play();
-				System.exit(0);
-			}
-		});
-		stage.addActor(quit);
 	}
 	
 	@Override
