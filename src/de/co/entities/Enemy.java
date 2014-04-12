@@ -17,22 +17,21 @@ public class Enemy {
 	public Enemy(float x, float y, float v) {
 		position = new Vector2(x, y);
 		velocity = new Vector2(0, v);
-		
 		circle = new Circle(x, y, 40);
 		
 		switch(GameState.difficulty) {
-		case 0: 
-			equation = new EasyEquation();
-			equation.getQuestion();
-			break;
-		case 1: 
-			//equation = new MediumEquation();
-			equation.getQuestion();
-			break;
-		case 2:
-			//equation = new HardEquation();
-			equation.getQuestion();
-			break;
+			case 0: 
+				equation = new EasyEquation();
+				equation.getQuestion();
+				break;
+			case 1: 
+				equation = new MediumEquation();
+				equation.getQuestion();
+				break;
+			case 2:
+				//equation = new HardEquation();
+				equation.getQuestion();
+				break;
 		}
 	}
 	

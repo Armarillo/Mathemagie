@@ -56,7 +56,7 @@ public class LostScreen extends SelectionScreen implements Screen{
 	}
 	
 	@Override
-	public void render(float delta) {
+	public void render(float delta) {	
 		
 		// Clear screen
 		Gdx.gl.glClearColor(0/255.0f, 0/255.0f, 0/255.0f, 1);
@@ -72,6 +72,12 @@ public class LostScreen extends SelectionScreen implements Screen{
 		AssetLoader.highFont.draw(batch, "Score: " + GameState.lastScore, 230, 350);
 		AssetLoader.highFont.draw(batch, "Stage: " + GameState.lastStage, 230, 375);
 		batch.end();
+		
+		// Draw stage
+		stage.act(delta);
+		stage.draw();
+		
+		Gdx.input.setInputProcessor(stage);
 		
 	}
 }

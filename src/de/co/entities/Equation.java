@@ -7,9 +7,12 @@ public abstract class Equation {
 	public String question;
 	public double answer;
 	public Random r;
+	public boolean center;
+	public int a, b;
 	
 	public Equation() {
 		
+		center = false;
 		r = new Random();
 		question = setQuestion();
 	}
@@ -24,10 +27,14 @@ public abstract class Equation {
 		return answer;
 	}
 	
-	public boolean checkAnswer(int answer) {
-		if(answer == this.answer)
+	public boolean checkAnswer(Integer integer) {
+		if(integer == this.answer)
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean getCenter() {
+		return center;
 	}
 }

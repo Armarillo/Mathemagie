@@ -9,41 +9,50 @@ public class EasyEquation extends Equation{
 	@Override
 	public String setQuestion() {
 		
-		int a, b;
-		
 		switch(r.nextInt(3)) {
 
-		case 0:
-			a = 1 + r.nextInt(100);
-			b = 1 + r.nextInt(100);
+			case 0:
 				
-			answer = a+b;
-			return a + " + " + b;
-		case 1:
+				// Addition
+				a = 1 + r.nextInt(100);
+				b = 1 + r.nextInt(100);
+					
+				answer = a+b;
+				return a + " + " + b;
 			
-			a = 1 + r.nextInt(100);
-			b = 1 + r.nextInt(100);
-			
-			answer = a-b;
-			return a + " - " + b;
-		case 2:
-			do {
-				a = 1 + r.nextInt(20);
-				b = 1 + r.nextInt(20);
+			case 1:	
 				
-				answer = a*b;
-			}while(a > 10 && b > 10);
-			return a + " x " + b;
-		case 3:
-			do {
+				// Subtraction
 				a = 1 + r.nextInt(100);
 				b = 1 + r.nextInt(100);
 				
-				answer = a/b;
-			}while(a%b != 0);
-			return a + " x " + b;
-		default:
-			return "error";
+				answer = a-b;
+				return a + " - " + b;
+			
+			case 2:
+				
+				// Multiplication with lower numbers
+				do {
+					a = 1 + r.nextInt(20);
+					b = 1 + r.nextInt(20);
+					
+					answer = a*b;
+				}while(a > 10 && b > 10);
+				return a + " x " + b;
+			
+			case 3:
+				
+				// Division with divisible numbers
+				do {
+					a = 1 + r.nextInt(100);
+					b = 1 + r.nextInt(100);
+					
+					answer = a/b;
+				}while(a%b != 0);
+				return a + " x " + b;
+			
+			default:
+				return "error";
 		}
 	}
 }

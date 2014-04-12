@@ -22,8 +22,8 @@ public class DifficultyScreen extends SelectionScreen implements Screen{
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.click.play();
 				AssetLoader.menuMusic.stop();
-				window.setScreen(new GameScreen(window));
 				GameState.difficulty = 0;
+				window.setScreen(new GameScreen(window));
 			}
 		});
 		stage.addActor(play);
@@ -37,8 +37,8 @@ public class DifficultyScreen extends SelectionScreen implements Screen{
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.click.play();
 				AssetLoader.menuMusic.stop();
-				window.setScreen(new GameScreen(window));
 				GameState.difficulty = 1;
+				window.setScreen(new GameScreen(window));
 			}
 		});
 		stage.addActor(option);
@@ -52,8 +52,8 @@ public class DifficultyScreen extends SelectionScreen implements Screen{
 			public void clicked(InputEvent event, float x, float y) {
 				AssetLoader.click.play();
 				AssetLoader.menuMusic.stop();
-				window.setScreen(new GameScreen(window));
 				GameState.difficulty = 2;
+				window.setScreen(new GameScreen(window));
 			}
 		});
 		stage.addActor(credits);

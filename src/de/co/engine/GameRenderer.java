@@ -78,12 +78,16 @@ public class GameRenderer {
 		
 		// Draw equation
 		for(int i = 0; i < world.getEnemy().length; i++) {
-			
-			AssetLoader.font.draw(batch, 
-					world.getEnemy()[i].getEquation().getQuestion(), 
-					world.getEnemy()[i].getCircle().x-22, world.getEnemy()[i].getCircle().y-5);
+			if(world.getEnemy()[i].getEquation().getCenter()) {
+				AssetLoader.mathFont2.draw(batch, 
+						world.getEnemy()[i].getEquation().getQuestion(), 
+						world.getEnemy()[i].getCircle().x-20, world.getEnemy()[i].getCircle().y-10);
+			}else{
+				AssetLoader.mathFont.draw(batch, 
+						world.getEnemy()[i].getEquation().getQuestion(), 
+						world.getEnemy()[i].getCircle().x-22, world.getEnemy()[i].getCircle().y-5);
+			}
 		}
-		
 		
 		batch.end();
 		

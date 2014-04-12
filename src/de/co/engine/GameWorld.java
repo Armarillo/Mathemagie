@@ -47,7 +47,7 @@ public class GameWorld {
 		
 		// Initialize enemies
 		for(int i = 0; i < enemy.length; i++)
-			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(10)-30, 10 + r.nextInt(50));
+			enemy[i] = new Enemy(50+r.nextInt(620), -r.nextInt(10)-30, 10 + r.nextInt(40));
 		
 		// Get target aiming
 		target = new Target();
@@ -140,8 +140,6 @@ public class GameWorld {
 					targetIndex++;
 			}
 		}
-		
-		System.out.println(targetIndex + " : " + amount);
 		
 		// Reset level
 		if(targetIndex == amount) {

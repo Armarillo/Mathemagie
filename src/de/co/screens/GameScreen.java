@@ -22,7 +22,7 @@ public class GameScreen implements Screen{
 		renderer = new GameRenderer(world);
 		
 		// Play music
-		if(!GameState.musicMute) id =AssetLoader.menuMusic.loop();
+		if(!GameState.musicMute) id = AssetLoader.menuMusic.loop();
 	}
 	
 	// The main loop of the game - its heart, can you hear it beating?

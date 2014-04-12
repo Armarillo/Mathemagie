@@ -18,9 +18,10 @@ public class AssetLoader {
 	public static BitmapFont font;
 	public static BitmapFont highFont;
 	public static BitmapFont bigFont;
+	public static BitmapFont mathFont;
+	public static BitmapFont mathFont2;
 	
 	public static TextureRegion health;
-	
 	public static TextureRegion title;
 	public static TextureRegion pi;
 	public static TextureRegion binomial;
@@ -87,7 +88,10 @@ public class AssetLoader {
 		highFont.setScale(1, -1);
 		bigFont = new BitmapFont(Gdx.files.internal("data/font/bigfont.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font/bigfont.png"))), false);
 		bigFont.setScale(1, -1);
-		
+		mathFont = new BitmapFont(Gdx.files.internal("data/font/math.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font/math.png"))), false);
+		mathFont.setScale(.75f, -.75f);
+		mathFont2 = new BitmapFont(Gdx.files.internal("data/font/math2.fnt"), new TextureRegion(new Texture(Gdx.files.internal("data/font/math2.png"))), false);
+		mathFont2.setScale(.75f, -.75f);
 	}
 	
 	public static void loadSound() {
